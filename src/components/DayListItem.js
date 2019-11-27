@@ -7,7 +7,7 @@ export default function DayListItem( { name, spots, selected, setDay }) {
   const dayClass = classNames("day-list__item", {
     "day-list__item--selected": selected,
     "day-list__item--full": !spots,
-  })
+  });
   
   const formatSpots = (spots) => {
     if (!spots) {
