@@ -11,6 +11,7 @@ import DayList from "components/DayList"
 import InterviewerListItem from "components/InterviewerListItem"
 import InterviewerList from "components/InterviewerList"
 import Appointment from "components/Appointment"
+import Header from "components/Appointment/Header"
 
 storiesOf("Button", module)
   .addParameters({
@@ -134,9 +135,14 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
     })
     .add("Appointment", () => (
       <Appointment />
-      ))
+    ))
     .add("Appointment with Time", () => (
       <Appointment 
       time="12pm" 
       />
-      ));
+    ))
+    .add("Header", () => (
+      <Appointment
+      time="12pm"
+      />
+    ))
