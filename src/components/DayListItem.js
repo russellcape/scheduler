@@ -28,4 +28,3 @@ export default function DayListItem( { name, spots, selected, setDay }) {
     </li>
   );
 }
-
