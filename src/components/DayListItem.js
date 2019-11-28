@@ -1,8 +1,9 @@
 import React from "react";
-import "components/DayListItem.scss"
-import classNames from 'classnames'
+import "components/DayListItem.scss";
+import classNames from 'classnames';
 
-export default function DayListItem( { name, spots, selected, setDay }) {
+export default function DayListItem(props) {
+  const { name, spots, selected, setDay } = props;
   
   const dayClass = classNames("day-list__item", {
     "day-list__item--selected": selected,
@@ -18,8 +19,6 @@ export default function DayListItem( { name, spots, selected, setDay }) {
       return `${spots} spots remaining`
     }
   }
-  
-  
   
   return (
     <li className={dayClass} onClick={() => setDay(name)}>
