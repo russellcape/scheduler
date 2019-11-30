@@ -48,7 +48,7 @@ export default function Application(props) {
       })
     );
   }
-
+  
   const setDay = day => setState({...state, day});
 
 
