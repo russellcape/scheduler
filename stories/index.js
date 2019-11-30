@@ -75,39 +75,39 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
       <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
     ));
 
-    const interviewer = {
-      id: 1,
-      name: "Sylvia Palmer",
-      avatar: "https://i.imgur.com/LpaY82x.png"
-    };
+  const interviewer = {
+    id: 1,
+    name: "Sylvia Palmer",
+    avatar: "https://i.imgur.com/LpaY82x.png"
+  };
     
-    storiesOf("InterviewerListItem", module)
-      .addParameters({
-        backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-      })
-      .add("Unselected", () => (
-        <InterviewerListItem
-          id={interviewer.id}
-          name={interviewer.name}
-          avatar={interviewer.avatar}
-        />
-      ))
-      .add("Selected", () => (
-        <InterviewerListItem
-          id={interviewer.id}
-          name={interviewer.name}
-          avatar={interviewer.avatar}
-          selected
-        />
-      ))
-      .add("Clickable", () => (
-        <InterviewerListItem
-          id={interviewer.id}
-          name={interviewer.name}
-          avatar={interviewer.avatar}
-          setInterviewer={event => action("setInterviewer")(interviewer.id)}
-        />
-      ));
+  storiesOf("InterviewerListItem", module)
+    .addParameters({
+      backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+    })
+    .add("Unselected", () => (
+      <InterviewerListItem
+        id={interviewer.id}
+        name={interviewer.name}
+        avatar={interviewer.avatar}
+      />
+    ))
+    .add("Selected", () => (
+      <InterviewerListItem
+        id={interviewer.id}
+        name={interviewer.name}
+        avatar={interviewer.avatar}
+        selected
+      />
+    ))
+    .add("Clickable", () => (
+      <InterviewerListItem
+        id={interviewer.id}
+        name={interviewer.name}
+        avatar={interviewer.avatar}
+        setInterviewer={event => action("setInterviewer")(interviewer.id)}
+      />
+    ));
 
     const interviewers = [
       { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -117,23 +117,23 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
       { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
     ];
       
-      storiesOf("InterviewerList", module)
-        .addParameters({
-          backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-        })
-        .add("Initial", () => (
-          <InterviewerList
-            interviewers={interviewers}
-            onChange={action("onChange")}
-          />
-        ))
-        .add("Preselected", () => (
-          <InterviewerList
-            interviewers={interviewers}
-            value={3}
-            onChange={action("onChange")}
-          />
-        ));
+    storiesOf("InterviewerList", module)
+      .addParameters({
+        backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+      })
+      .add("Initial", () => (
+        <InterviewerList
+          interviewers={interviewers}
+          onChange={action("onChange")}
+        />
+      ))
+      .add("Preselected", () => (
+        <InterviewerList
+          interviewers={interviewers}
+          value={3}
+          onChange={action("onChange")}
+        />
+      ));
 
   storiesOf("Appointment", module)
     .addParameters({

@@ -3,7 +3,7 @@ import InterviewerList from "../InterviewerList"
 import Button from "../Button"
 
 export default function Form(props) {
-  const { name, interviewers, interviewer, onSave, onCancel } = props;
+  const { name, interviewers, interviewer, onSave, onCancel, currentName } = props;
 
   const [stateName, setStateName] = useState(name || "");
   const [stateInterviewer, setStateInterviewer] = useState(interviewer || null);
@@ -24,10 +24,11 @@ export default function Form(props) {
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
-            name="name"
+            name={stateName}
             type="text"
             placeholder="Enter Student Name"
             onChange={(event) => setStateName(event.target.value)}
+            defaultValue={currentName}
           />
         </form>
         <InterviewerList interviewers={interviewers} value={stateInterviewer} onChange={setStateInterviewer} />
