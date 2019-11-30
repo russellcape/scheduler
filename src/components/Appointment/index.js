@@ -1,18 +1,61 @@
 import React from "react";
 
-import "components/Appointment/styles.scss";
+import "./styles.scss";
 
-import Header from "components/Appointment/Header"
-import Show from "components/Appointment/Show"
-import Empty from "components/Appointment/Empty"
+import Header from "./Header"
+import Show from "./Show"
+import Empty from "./Empty"
+import Form from "./Form"
+import Status from "./Status"
 
+import useVisualMode from "../../hooks/useVisualMode"
+
+const EMPTY = "EMPTY";
+const SHOW = "SHOW";
+const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 export default function Appointment(props) {
-  const { interview, time, id } = props;
+  const { interview, time, id, bookInterview, interviewers } = props;
+  const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
+
+  const onAdd = () => { transition(CREATE) };
+  
+  const onCancel = () => { back() };
+
+  const onSave = function(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    transition(SAVING);
+
+    bookInterview(id, interview)
+    .then(() => transition(SHOW))
+  };
+
   return(
     <article className="appointment">
       <Header time={time}/>
-        {interview ? <Show interviewer={interview.interviewer} student={interview.student}/> : <Empty />}
+      {mode === EMPTY && (
+      <Empty onAdd={onAdd}/>
+      )}
+      {mode === SHOW && (
+        <Show
+          student={interview.student}
+          interviewer={interview.interviewer}
+        />
+      )}
+      {mode === CREATE && (
+      <Form 
+        interviewers={interviewers}
+        onCancel={onCancel}
+        onSave={onSave}
+      />
+      )}
+      {mode === SAVING && (
+        <Status message="Saving"/>
+      )}
     </article>
   );
 };
