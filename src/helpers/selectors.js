@@ -10,26 +10,26 @@ export function getAppointmentsForDay(state, day) {
       filteredAppointments.push(state.appointments[appointmentId])
     }
   });
-  // console.log(filteredAppointments)
   return filteredAppointments;
 };
 
-
 export function getInterview(state, interview) {
+  // console.log(state)
+  const interviewer = {};
   if (!interview) {
     return null;
   }
-  const interviewer = state.interviewers[interview.interviewer];
-  const studentName = interview.student
+  // student name and interviewer id are stored in the variables:
+  const studentName = interview.student;
+  const interviewerId = interview.interviewer;
 
-  // console.log(state)
-  // console.log(interview.student)
-  // console.log(interviewer)
+  // interviewer stored in state:
+  const interviewerInfo = state.interviewers[interviewerId];
 
-  return({
-    student: studentName,
-    interviewer: interviewer
-  });
+  interviewer.student = studentName;
+  interviewer.interviewer = interviewerInfo;
+  
+  return interviewer;
 };
 
 export function getInterviewersForDay(state, day) {
@@ -40,8 +40,8 @@ export function getInterviewersForDay(state, day) {
   }
   const interviewersArr = filteredDays[0].interviewers
   const interviewersForDay = [];
+
   for (const interviewer of interviewersArr) {
-    // console.log(interviewer)
     if (interviewer in state.interviewers) {
       interviewersForDay.push(state.interviewers[interviewer])
     }

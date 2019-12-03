@@ -1,25 +1,89 @@
-// import { useState } from "react"
+import { useReducer, useEffect } from "react";
+import axios from "axios"
 
-// export default function useApplicationData(state, applicationData) {
+  const SET_DAY = "SET_DAY";
+  const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_INTERVIEW = "SET_INTERVIEW";
+  const SET_SPOTS = "SET_SPOTS"
 
-// const useApplicationData = {
-//   state: {},
-//   setDay: [],
-//   bookInterview: ((event) => {
-//     applicationData
-//   }),
-//   cancelInterview
-// }
+  function reducer(state, action) {
+    switch (action.type) {
+      case SET_DAY:
+        return { ...state, day: action.day }
+      case SET_APPLICATION_DATA:
+        return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
+      case SET_INTERVIEW:
+          const appointment = {
+            ...state.appointments[action.id],
+            interview: { ...action.interview }
+          };
+          const appointments = {
+            ...state.appointments,
+            [action.id]: appointment
+          };
+          return { ...state, appointments };
+          case SET_SPOTS:
+            const day = {
+              ...state.days[action.id],
+              spots: action.spots
+            };
+            const days = [
+              ...state.days,
+            ];
+            days[action.id] = day;
+            return { ...state, days };
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+        );
+    }
+  }
 
-// }
+export function useApplicationData() {
+
+  const [state, dispatch] = useReducer(reducer, {
+    day: "Monday",
+    days: [],
+    appointments: {},
+    interviewers: {}
+  });
+
+  const setDay = day => dispatch({type: SET_DAY, day});
 
 
-// // Our useApplicationData Hook will return an object with four keys.
+  useEffect(() => {
+    Promise.all([
+      Promise.resolve(axios.get("http://localhost:8001/api/days")),
+      Promise.resolve(axios.get("http://localhost:8001/api/appointments")),
+      Promise.resolve(axios.get("http://localhost:8001/api/interviewers"))
+    ]).then((all) => {
+      dispatch({ type: SET_APPLICATION_DATA, days: all[0].data, appointments: all[1].data, interviewers: all[2].data})
+    });
+  }, [])
 
-// // The state object will maintain the same structure.
-// // The setDay action can be used to set the current day.
-// // The bookInterview action makes an HTTP request and updates the local state.
-// // The cancelInterview action makes an HTTP request and updates the local state.
+  const bookInterview = function(id, interview) {
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .then(() => {
+        dispatch({ type: SET_INTERVIEW, id, interview })
+        axios.get("http://localhost:8001/api/days")
+          .then((res) => {
+            dispatch({ type: SET_SPOTS, id: Math.floor(id / 5), spots: res.data[Math.floor(id / 5)].spots })
+          })
+      });
+    }
 
+  const deleteInterview = function(id) {
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+      .then(() => {
+        dispatch({ type: SET_INTERVIEW, id, interview: null })
+        axios.get('http://localhost:8001/api/days')
+        .then((res) => {
+          dispatch({ type: SET_SPOTS, id: Math.floor(id / 5), spots: res.data[Math.floor(id / 5)].spots })
+        })
+      }
+    );
+  }
+  return { state, setDay, bookInterview, deleteInterview }
+};
 
-// // ... wrong day
+export default useApplicationData;
