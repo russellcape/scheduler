@@ -93,7 +93,7 @@ export default function Appointment(props) {
       }
       {mode === CONFIRM && 
         <Confirm
-          message="Are you sure you wouldlike to delete?"
+          message="Are you sure you would like to delete?"
           onConfirm={() => {
             transition(DELETE, true);
             deleteInterview(id)
@@ -108,13 +108,13 @@ export default function Appointment(props) {
       }
       {mode === ERROR_SAVE && (
         <Error
-        message="Appointment coul not be saved!"
+        message="Appointment could not be saved."
         onClose={() => { back() }}
         />
       )}
       {mode === ERROR_DELETE && (
         <Error
-        message="Appointment coul not be deleted!"
+        message="Appointment could not be deleted."
         onClose={() => { back() }}
         />
       )}

@@ -22,7 +22,7 @@ import axios from "axios"
             [action.id]: appointment
           };
           return { ...state, appointments };
-          case SET_SPOTS:
+        case SET_SPOTS:
             const day = {
               ...state.days[action.id],
               spots: action.spots
@@ -31,13 +31,13 @@ import axios from "axios"
               ...state.days,
             ];
             days[action.id] = day;
-            return { ...state, days };
-      default:
-        throw new Error(
-          `Tried to reduce with unsupported action type: ${action.type}`
-        );
+          return { ...state, days };
+        default:
+          throw new Error(
+            `Tried to reduce with unsupported action type: ${action.type}`
+          );
+      }
     }
-  }
 
 export function useApplicationData() {
 
@@ -57,7 +57,7 @@ export function useApplicationData() {
       Promise.resolve(axios.get("http://localhost:8001/api/appointments")),
       Promise.resolve(axios.get("http://localhost:8001/api/interviewers"))
     ]).then((all) => {
-      dispatch({ type: SET_APPLICATION_DATA, days: all[0].data, appointments: all[1].data, interviewers: all[2].data})
+      dispatch({ type: SET_APPLICATION_DATA, days: all[0].data, appointments: all[1].data, interviewers: all[2].data })
     });
   }, [])
 

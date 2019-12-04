@@ -38,7 +38,7 @@ export function getInterviewersForDay(state, day) {
   if (filteredDays.length === 0) {
     return [];
   }
-  const interviewersArr = filteredDays[0].interviewers
+  const interviewersArr = filteredDays[0].interviewers;
   const interviewersForDay = [];
 
   for (const interviewer of interviewersArr) {

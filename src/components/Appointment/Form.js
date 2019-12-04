@@ -19,12 +19,13 @@ export default function Form(props) {
     onCancel();
   }
 
-  function validate() {
+  function validate(name, interviewer) {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
     }
-    onSave(name, interviewer);
+    setError("")
+    onSave(stateName, stateInterviewer);
   }
 
   return(
@@ -40,7 +41,9 @@ export default function Form(props) {
             onChange={(event) => setStateName(event.target.value)}
             data-testid="student-name-input"
           />
-          <section className="appointment__validation">{error}</section>
+          <section className="appointment__validation">
+            {error}
+          </section>
         </form>
         <InterviewerList 
           interviewers={interviewers} 
