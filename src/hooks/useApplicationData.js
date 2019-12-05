@@ -53,19 +53,19 @@ export function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      Promise.resolve(axios.get("http://localhost:8001/api/days")),
-      Promise.resolve(axios.get("http://localhost:8001/api/appointments")),
-      Promise.resolve(axios.get("http://localhost:8001/api/interviewers"))
+      Promise.resolve(axios.get("/api/days")),
+      Promise.resolve(axios.get("/api/appointments")),
+      Promise.resolve(axios.get("/api/interviewers"))
     ]).then((all) => {
       dispatch({ type: SET_APPLICATION_DATA, days: all[0].data, appointments: all[1].data, interviewers: all[2].data })
     });
   }, [])
 
   const bookInterview = function(id, interview) {
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
+    return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
         dispatch({ type: SET_INTERVIEW, id, interview })
-        axios.get("http://localhost:8001/api/days")
+        axios.get("/api/days")
           .then((res) => {
             dispatch({ type: SET_SPOTS, id: Math.floor(id / 5), spots: res.data[Math.floor(id / 5)].spots })
           })
@@ -73,10 +73,10 @@ export function useApplicationData() {
     }
 
   const deleteInterview = function(id) {
-    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+    return axios.delete(`/api/appointments/${id}`)
       .then(() => {
         dispatch({ type: SET_INTERVIEW, id, interview: null })
-        axios.get('http://localhost:8001/api/days')
+        axios.get('/api/days')
         .then((res) => {
           dispatch({ type: SET_SPOTS, id: Math.floor(id / 5), spots: res.data[Math.floor(id / 5)].spots })
         })
