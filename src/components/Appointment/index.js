@@ -45,12 +45,12 @@ export default function Appointment(props) {
       })
   }
 
-  const destroy = function(id) {
+  const destroy = function() {
     transition(CONFIRM)
   };
 
   return(
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header time={time}/>
         {mode === EMPTY && (
         <Empty
