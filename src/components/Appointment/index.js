@@ -40,7 +40,7 @@ export default function Appointment(props) {
       .then(() => {
         transition(SHOW)
       })
-      .catch(() => {
+      .catch((e) => {
         transition(ERROR_SAVE, true)
       })
   }
@@ -83,12 +83,12 @@ export default function Appointment(props) {
       }
       {mode === SAVING && 
         <Status
-          message="Saving"
+          message="SAVING"
         />
       }
       {mode === DELETE && 
         <Status
-        message="Deleting"
+        message="DELETING"
         />
       }
       {mode === CONFIRM && 
@@ -100,10 +100,9 @@ export default function Appointment(props) {
               .then(() => { 
                 transition(EMPTY);
               })
+              .catch(() => transition(ERROR_DELETE, true))
             }}
-          onCancel={() => {
-            transition(SHOW)
-          }}
+          onCancel={() => transition(SHOW)}
         />
       }
       {mode === ERROR_SAVE && (
