@@ -14,7 +14,7 @@ Interview scheduler allows users to book meetings from a list of interviewers on
 
 ## Final Product
 
-!["Main page display & Book/Edit interview functionality"](https://raw.githubusercontent.com/Caronise/scheduler/master/docs/appointment.png)
+!["Main page display & Book/Edit interview functionality"](https://github.com/russellcape/scheduler/blob/master/docs/appointments_friday.png)
 
 !["Confirm delete functionality"](https://raw.githubusercontent.com/Caronise/scheduler/master/docs/Delete.png)
 
