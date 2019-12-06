@@ -32,7 +32,7 @@ export function useApplicationData() {
   const bookInterview = function(id, interview) {
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
-        dispatch({ type: SET_INTERVIEW, id, interview })
+        dispatch({ type: SET_INTERVIEW, id, interview, operation: "update" })
       });
     }
 
