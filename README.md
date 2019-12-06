@@ -2,7 +2,7 @@
 
 Interview scheduler allows users to book meetings from a list of interviewers on any given day
 
-## Features 
+## Features
 
 - View booked interviews and spots remaining for a given day on the sidebar and main menu
 - Book, edit or cancel any interviews
@@ -10,7 +10,6 @@ Interview scheduler allows users to book meetings from a list of interviewers on
 - See the interviewers that are available on a given day when creating a booking
 - Confirm changes before cancelling an interview
 - Display error messages in case of a network issue
-
 
 ## Final Product
 

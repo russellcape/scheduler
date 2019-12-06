@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import InterviewerList from "../InterviewerList"
-import Button from "../Button"
+import React, { useState } from "react";
+import InterviewerList from "../InterviewerList";
+import Button from "../Button";
 
 export default function Form(props) {
   const { name, interviewers, interviewer, onSave, onCancel } = props;
@@ -17,18 +17,18 @@ export default function Form(props) {
   const cancel = function() {
     reset();
     onCancel();
-  }
+  };
 
   const validate = function(name, interviewer) {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
     }
-    setError("")
+    setError("");
     onSave(stateName, stateInterviewer);
-  }
+  };
 
-  return(
+  return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
@@ -38,25 +38,27 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             value={stateName}
-            onChange={(event) => setStateName(event.target.value)}
+            onChange={event => setStateName(event.target.value)}
             data-testid="student-name-input"
           />
-          <section className="appointment__validation">
-            {error}
-          </section>
+          <section className="appointment__validation">{error}</section>
         </form>
-        <InterviewerList 
-          interviewers={interviewers} 
-          value={stateInterviewer} 
-          onChange={setStateInterviewer} 
+        <InterviewerList
+          interviewers={interviewers}
+          value={stateInterviewer}
+          onChange={setStateInterviewer}
         />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={() => validate(stateName, stateInterviewer)}>Save</Button>
+          <Button danger onClick={cancel}>
+            Cancel
+          </Button>
+          <Button confirm onClick={() => validate(stateName, stateInterviewer)}>
+            Save
+          </Button>
         </section>
       </section>
     </main>
-  )
+  );
 }

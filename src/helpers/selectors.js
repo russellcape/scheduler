@@ -7,11 +7,11 @@ export function getAppointmentsForDay(state, day) {
   }
   selectedDay[0].appointments.forEach(appointmentId => {
     if (String(appointmentId) in state.appointments) {
-      filteredAppointments.push(state.appointments[appointmentId])
+      filteredAppointments.push(state.appointments[appointmentId]);
     }
   });
   return filteredAppointments;
-};
+}
 
 export function getInterview(state, interview) {
   // console.log(state)
@@ -28,9 +28,9 @@ export function getInterview(state, interview) {
 
   interviewer.student = studentName;
   interviewer.interviewer = interviewerInfo;
-  
+
   return interviewer;
-};
+}
 
 export function getInterviewersForDay(state, day) {
   const filteredDays = state.days.filter(dayObj => dayObj.name === day);
@@ -43,7 +43,7 @@ export function getInterviewersForDay(state, day) {
 
   for (const interviewer of interviewersArr) {
     if (interviewer in state.interviewers) {
-      interviewersForDay.push(state.interviewers[interviewer])
+      interviewersForDay.push(state.interviewers[interviewer]);
     }
   }
   return interviewersForDay;

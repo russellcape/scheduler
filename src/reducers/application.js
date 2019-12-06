@@ -2,7 +2,6 @@ export const SET_DAY = "SET_DAY";
 export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 export const SET_INTERVIEW = "SET_INTERVIEW";
 
-
 function reducer(state, action) {
   switch (action.type) {
     case SET_DAY:
@@ -16,28 +15,30 @@ function reducer(state, action) {
       };
 
     case SET_INTERVIEW:
-
       const mapDays = state.days.map(day => {
         if (!day.appointments.includes(action.id)) {
           return day;
         } else {
-          if (action.operation === 'delete') {
+          if (action.operation === "delete") {
             return {
               ...day,
-              spots: day.spots + 1,
+              spots: day.spots + 1
             };
-          } else if (action.operation === 'update' && state.appointments[action.id].interview === null) {
+          } else if (
+            action.operation === "update" &&
+            state.appointments[action.id].interview === null
+          ) {
             return {
               ...day,
-              spots: day.spots - 1,
-            }
+              spots: day.spots - 1
+            };
           } else {
             return {
               ...day
-            }
+            };
           }
         }
-      })
+      });
 
       const appointment = {
         ...state.appointments[action.id],
@@ -54,6 +55,6 @@ function reducer(state, action) {
         `Tried to reduce with unsupported action type: ${action.type}`
       );
   }
-};
+}
 
 export default reducer;
