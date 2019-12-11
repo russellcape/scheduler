@@ -20,9 +20,14 @@ export default function Form(props) {
   };
 
   const validate = function(name, interviewer) {
+    if (name === "" && interviewer === null) {
+      return setError("Please enter name and select an interviewer.")
+    }
     if (name === "") {
-      setError("Student name cannot be blank");
-      return;
+      return setError("Student name cannot be blank");
+    }
+    if (interviewer === null) {
+      return setError("An interviewer must be selected")
     }
     setError("");
     onSave(stateName, stateInterviewer);
