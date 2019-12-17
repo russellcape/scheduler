@@ -29,9 +29,7 @@ Interview scheduler allows users to book meetings from a list of interviewers on
 
 ## Download and Run the Scheduler API
 
-```sh
-Must run on VM to host: https://github.com/russellcape/scheduler-api
-```
+https://github.com/russellcape/scheduler-api
 
 ## Run the Webpack Development Server
 
